@@ -4,6 +4,12 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 import pandas as pd
 import pickle
+import pyautogui
+import keyboard as kbd # importing keyboard module
+import time
+string = "I love python! It is such an amazing language."
+time.sleep(3) # 3 second gap to avoid unwanted actions
+
 url='https://securities.stanford.edu/filings.html'
 chromeOptions = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : 'C:\\Users\\sudha\\Documents\\Stanford Securities\\pdf\\page1'}
@@ -87,6 +93,13 @@ for i in range(1,len(l)):
         current_url=driver.current_url
         public=driver.find_element("xpath",f'//*[@id="fic"]/table/tbody/tr[{j+1}]/td[2]')
         public.click()
+        pyautogui.hotkey('ctrl','s')
+        pyautogui.FAILSAFE=False
+
+        kbd.write(l[i+1], 0.1)
+        time.sleep(3)
+        for i in range(10):
+            pyautogui.press('enter')
         driver.get(driver.current_url)
         driver.get(current_url)
     chromeOptions = webdriver.ChromeOptions()
