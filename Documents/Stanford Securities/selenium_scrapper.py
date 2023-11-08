@@ -37,8 +37,15 @@ l=[]
 k=0
 for i in td:
     print(i.text)
-    if k%5==0:
+    if k!=0 and k%4==0:
         l.append(i.text)
     k+=1
 print(l)
+for i in range(1,len(l)):
+    specific_td=driver.find_element("xpath",f'//table//tbody//tr[{i}]//td[{i}]')
+    
+    specific_td.click()
+
+    
+    
 
