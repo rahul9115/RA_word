@@ -9,6 +9,7 @@ import pickle
 import pyautogui
 import keyboard as kbd # importing keyboard module
 import time
+from pathvalidate import is_valid_filename
 string = "I love python! It is such an amazing language."
 time.sleep(3) # 3 second gap to avoid unwanted actions
 
@@ -94,8 +95,17 @@ for i in range(1,len(name)):
         pyautogui.hotkey('ctrl','s')
         time.sleep(3)
         pyautogui.FAILSAFE=False
-        
-        kbd.write(name[i]+str(j+1),0.1)
+        filename=name[i]+str(j+1)
+        if not is_valid_filename(filename):
+            words=[]
+
+            for word in filename.split(" "):
+                test_str = ''.join(letter for letter in word if letter.isalnum())
+                words.append(test_str)
+            print(words)
+            filename=' '.join(words)
+
+        kbd.write(filename,0.1)
         time.sleep(3)
 
 
@@ -115,11 +125,11 @@ for i in range(1,len(name)):
         
     driver.get(url)
     
-name.pop(0)
-print(len(name),len(filing_date),len(district),len(exchange),len(ticker),len(headquar),len(pub))
-data={"Filing Name":name,"Filing Date":filing_date,"District Court":district,"Exchange":exchange,"Ticker":ticker,"HeadQuarters":headquar,"Listing":pub}
-df=pd.DataFrame(data=data)
-df.to_csv("filings.csv")    
+# name.pop(0)
+# print(len(name),len(filing_date),len(district),len(exchange),len(ticker),len(headquar),len(pub))
+# data={"Filing Name":name,"Filing Date":filing_date,"District Court":district,"Exchange":exchange,"Ticker":ticker,"HeadQuarters":headquar,"Listing":pub}
+# df=pd.DataFrame(data=data)
+# df.to_csv("filings.csv")    
 
     
     

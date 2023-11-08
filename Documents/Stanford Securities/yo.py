@@ -1,5 +1,14 @@
-import pyautogui
-import keyboard
-string="Outlook Therapeutics, Inc. Securities Litigation"
-# pyautogui.write(string) # 0.1 second typewrite effect
-keyboard.write(string,0.1)
+from pathvalidate import is_valid_filename
+import re
+
+filename = "Barclays PLC : American Depositary Receipts"
+words=[]
+
+for word in filename.split(" "):
+    test_str = ''.join(letter for letter in word if letter.isalnum())
+    words.append(test_str)
+print(words)
+filename=' '.join(words)
+print(filename)
+is_valid = is_valid_filename(filename)
+print(is_valid)
