@@ -26,12 +26,14 @@ with open("credentials.txt","r") as file:
     print("credential details",username,password)
 check_login=False
 page=1
+df=pd.read_csv("filings.csv")
 df_list=[]
-for i in range(100):
+df_list.append(df)
+for page in range(3,100):
     url=f'https://securities.stanford.edu/filings.html?page={page}'
     driver.get(url)
     with open("filename.txt","a") as f:
-        f.write(str(page))
+        f.write(str(page)+"\n")
     if check_login==False:
        
         login=driver.find_element("xpath",'//a[@href="#myModalLogin"]')
@@ -81,7 +83,7 @@ for i in range(100):
     print("Companies",name)
     name.insert(0,0)
     print(len(name))
-    df_list=[]
+    
     headquar=[]
     pub=[]
     for i in range(1,len(name)):
@@ -116,7 +118,7 @@ for i in range(100):
                 filename=' '.join(words)
 
             kbd.write(filename,0.1)
-            time.sleep(3)
+            time.sleep(5)
 
 
 
