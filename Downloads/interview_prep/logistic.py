@@ -10,8 +10,8 @@ class LogisticRegression:
         self.n=learning_rate
     
     def update_weights(self,x,y,y_pred):
-        dw=(x.T).dot(y_pred-y))/x.shape[0]
-        db=-(2*np.sum(y_pred-y))/x.shape[0]
+        dw=((x.T).dot(y_pred-y))/x.shape[0]
+        db=(np.sum(y_pred-y))/x.shape[0]
         self.w=self.w-self.n*dw
         self.b=self.b-self.n*db
 
